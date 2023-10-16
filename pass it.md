@@ -2,7 +2,10 @@
 
 ## Scanning and Enumeration (Siempre *sudo su* antes de ejecutarlo)
 
-Escaneo para hosts activos: 
+Escaneo para hosts activos dentro de una red, : 
 ```
-hola 
+nmap -A [ip]
+```
+```
+nmap -Pn [ip]
 ```
