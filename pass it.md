@@ -2,5 +2,6 @@
 
 ## Scanning and Enumeration (Siempre *sudo su* antes de ejecutarlo)
 
-Escaneo para hosts activos: ``` 
-hola ```
+Escaneo para hosts activos: 
+``` hola 
+```
