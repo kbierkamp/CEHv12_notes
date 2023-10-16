@@ -29,4 +29,26 @@ nmap --script-help='*palabra clave*'
 nmap --script [script.nse] [ip]
 nmap --script [categoria] [ip]
 ```
-
+**Enumeracion SMB**
+```
+nmap --script smb-os-discovery.nse [ip]
+nmap -sU -sS --script smb-enum-users.nse -p U:137, T:139 [ip]
+nmap --script smb-enum-users.nse -p 445 [ip]
+```
+**Enumeracion NetBios**
+```
+nmap -sV -v --script nbstat.nse [ip]
+nbtstat -a [ip] (en CMD despliega la tabla de NetBIOS Name)
+enum4linux -u martin -p apple -n [ip] (toda la informacion)
+enum4linux -u martin -p apple -P [ip] (informacion de politicas)
+```
+**Enumeracion SNMP**
+```
+nmap -sU -p 161 [ip]
+snmp-check [ip] (muestra cuentas de usuario, procesos, etc)
+```
+**Enumeracion MySQL**
+```
+nmap --script mysql-info [ip]
+nmap --script mysql-enum [ip]
+```
