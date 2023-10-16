@@ -11,17 +11,20 @@ Una vez que enumeraste todos los hosts activos en un segmento, en caso de que no
 ```
 nmap -sV -iL [archivo.txt]
 ```
+Descubrimiento de Sistema Operativo:
+```
+nmap -O [ip]
+```
 Evasion de Firewall:
 ```
 nmap -f [ip]
 nmap -g 80 [ip] (un puerto conocido, 80)
 nmap -sT -Pn --spoof-mac 0 [ip] (direccion MAC de origen aleatoria)
 ```
-**SCRIPTS DE NMAP**
+**SCRIPTS DE NMAP** . Categorias de scripts: all, auth, default, discovery, external, intrusive, malware, safe, vuln.
 ```
-nmap --script-help (ayuda general)
 nmap --script-help=[categoria]
-nmap --script-help '*palabra clave*'
+nmap --script-help='*palabra clave*'
 
 nmap --script [script.nse] [ip]
 nmap --script [categoria] [ip]
