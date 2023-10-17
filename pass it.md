@@ -91,4 +91,5 @@ Para identificar el BSSID primero se intenta con el comando de arriba, si no lo 
 ## Criptography
 Para **generar HASH de archivos** --> hashcalc (Windows)
 Para **desencriptar archivos** --> Cryptool (Windows, si no mencionan el Key length se presiona directamente decrypt, recuerda al buscar el archivo que este seleccionada en la ventana la opcion All Files (.*))
+
 Para convertir a texto plano un hash, simplemente se copia el contenido del archivo y se pega en --> hashes.com o crackstation.net
