@@ -53,6 +53,10 @@ snmp-check [ip] (muestra cuentas de usuario, procesos, etc)
 nmap --script mysql-info [ip]
 nmap --script mysql-enum [ip]
 ```
+**Enumera sitio web**
+```
+nmap -sV --script=http-enum [www.dominio.com]
+```
 ## Steganography
 Nota: El archivo a descifrar debe estar en la **misma** carpeta que snow.exe
 ```
@@ -150,4 +154,49 @@ sqlite3 mmssms.db
 SELECT * FROM sms;
 SELECT * FROM sms WHERE read=0;
 SELECT * FROM sms WHERE read=1;
+```
+## Malware Analysis
+Escanear archivos: Hybrid analysis (https://www.hybrid-analysis.com), Virus total (https://www.virustotal.com/gui/home/upload)  
+
+Para detectar empaquetamientos y ofuscacion: **PEiD**
+
+Para EntryPoint, hash, entropia, etc: **DIE**
+
+Para PE, section headers: **PE Explorer**
+## Hacking Web Applications
+wpscan NOTA: --random-user-agent: Permite evadir WAF
+```
+wpscan --url [http:example.com:8080/Directorio] 
+wpscan --url [http:example.com:8080/Directorio] -e u (enumerar usuarios)
+
+wpscan --url [http:example.com:8080/Directorio] --usernames [usernamelist.txt] --passwords passwordlist.txt 
+wpscan --url [http:example.com:8080/Directorio] -u [username] --passwords passwordlist.txt (si no permite -u, haz un .txt con el unico usuario)
+```
+Si no funciona wpscan, se usa **Metasploit**
+```
+msfconsole
+use auxiliary/scanner/http/wordpress_login_enum
+show options
+set TARGETURI https://dhabal.com/wp-login.php
+set RHOSTS https://dhabal.com
+set RPORT 443
+set USER_FILE [wordlist de usernames]
+set PASS_FILE [wordlist de passwords]
+```
+Crack credentials with **Hydra**
+```
+hydra -l [username] -P [wordlist de passwords.txt] ftp://[ip]
+hydra -L [wordlists de usernames.txt] -P [wordlist de passwords.txt] ftp://[ip]
+hydra -L [wordlists de usernames.txt] -P [wordlist de passwords.txt] -vV [IP] [servicio, por ejemplo ssh, telnet, smb]
+
+Si el servicio no esta ejecutandose en el puerto por defecto, se usa -s:
+hydra -L [wordlists de usernames.txt] -P [wordlist de passwords.txt] ftp://[ip] -s [puerto]
+
+alternativa: medusa -h [ip] -U [wordlist de usuarios] -p [wordlist de passwords] -M ftp -F
+```
+Crawling y escaneo de vulnerabilidades web --> **OWASP ZAP**
+
+**dirb** para enumerar directorios de forma recursiva, asegurate de que en el archivo de wordlist este incluido el nombre del archivo (con su extension) que tienes que encontrar.
+```
+dirb http://training.cehorg.com /usr/share/dirb/wordlists/common.txt -w
 ```
