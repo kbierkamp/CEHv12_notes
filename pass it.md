@@ -93,3 +93,13 @@ Para **generar HASH de archivos** --> hashcalc (Windows)
 Para **desencriptar archivos** --> Cryptool (Windows, si no mencionan el Key length se presiona directamente decrypt, recuerda al buscar el archivo que este seleccionada en la ventana la opcion All Files (.*))
 
 Para convertir a texto plano un hash, simplemente se copia el contenido del archivo y se pega en --> hashes.com o crackstation.net
+**Hashcat** Cuando no se sabe el tipo de hash, simplemente no se especifica.
+```
+hashcat -a 0 [archivo_hash_a_crackear] [wordlist_hashes, puede ser rockyou]
+```
+**Veracrypt** Cuando se debe desencriptar un Volume File. El password para montar en el disco puede estar hasheado.
+**BCTextEncoder**: Se copia el contenido del archivo y se decodifica usando el password que dan.
+**John The Ripper**
+```
+john --wordlist=[ruta_wordlist_password] [archivo_hash_a_crackear]
+```
