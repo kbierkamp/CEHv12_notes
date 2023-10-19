@@ -59,7 +59,7 @@ sudo service smbd restart
 **Acceso a recursos compartidos**
 
 Para acceder a un recurso compartido de una maquina Linux desde una maquina Windows, simplemente se va a Explorador de archivos > Red > 
-\\[ip_maquina_linux]
+\\[ip_maquina_linux] . Para esto la maquina Windows debe tener **Centro de Redes y recursos compartidos>Configuracion de uso compartido avanzado>Activar deteccion de red y uso compartido de archivos e impresoras**
 
 Por el lado contrario, para acceder a recursos compartidos de una maquina Windows desde una maquina Linux, hay varias opciones:
 
