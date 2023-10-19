@@ -1,7 +1,7 @@
 # MIS NOTAS CEH PRACTICAL V12
 ## Comandos sistemas operativos
 |Windows|Linux|Funcion|
------------------------
+|-------|-----|-------|
 |'systeminfo'|'uname -a'| Informacion SO y Kernel Version|    
 |
 ## Transferencia de archivos
