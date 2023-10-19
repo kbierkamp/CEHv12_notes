@@ -15,9 +15,29 @@
 |`arp -a`|`arp -n`| Tabla ARP|
 |`python -m http.server 8000`|`python -m http.server (o SimpleHTTPServer) 8000`| Crea un servidor de archivos local, preferiblemente hacerlo en linux|
 ||`wget http://[ip]:8000/ruta_archivo`|Descargar archivo de un servidor|
+||`dig @[ip servidor DNS][dominio]`|Consulta si alguien ha entrado a ese dominio a través de ese servidor DNS|
+||`dig @NameServerPrimario [dominio] axfr`|Transferencia de zona en LINUX|
+|`nslookup --> [ip o dominio] --> set type=[A,AAAA,CNAME,NS,SOA,MX,PTR,SRV]`|Lo mismo|Consultas DNS|
+|`nslookup --> server [name server principal del dominio] --> set type=any --> ls -d [dominio]`|Transferencia de zona en Windows|
 
 
 ## Transferencia de archivos
+**Compartir recursos**
+En Windows para compartir un archivo, se hace clic derecho> Dar acceso a > Usuarios específicos > Compartir (sin colocar usuarios)
+
+En Linux hay que habilitar el servidor Samba, el cual es una implementación de software libre del protocolo SMB, tambien conocido como Common Internet File System (CIFS)
+```
+sudo apt-get install samba
+sudo cp /etc/samba/smb.conf /etc/samba/smb.conf.backup
+sudo pluma /etc/samba/smb.conf
+[Nombre para darle a el recurso]
+          path = /ruta/al/directorio
+          guest ok = yes
+          read only = no 
+Configurar permisos chmod y chown al directorio, recuerda usar la opción -R (recursiva)
+sudo service smbd restart
+```
+**Acceso a recursos compartidos**
 Para acceder a un recurso compartido de una maquina Linux desde una maquina Windows, simplemente se va a Explorador de archivos > Red > \\[ip_maquina_linux]
 Por el lado contrario, para acceder a recursos compartidos de una maquina Windows desde una maquina Linux, hay varias opciones:
 
