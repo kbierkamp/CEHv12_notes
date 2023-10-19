@@ -2,7 +2,7 @@
 ## Comandos sistemas operativos
 |Windows|Linux|Funcion|
 |-------|-----|-------|
-|'systeminfo'|'uname -a'| Informacion SO y Kernel Version|    
+|`systeminfo`|`uname -a`| Informacion SO y Kernel Version|    
 |
 ## Transferencia de archivos
 Para acceder a un recurso compartido de una maquina Linux desde una maquina Windows, simplemente se va a Explorador de archivos > Red > \\[ip_maquina_linux]
