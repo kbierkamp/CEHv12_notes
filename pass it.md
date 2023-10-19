@@ -14,6 +14,8 @@
 |`netstat -ano`|`netstat -tulna`| Puertos y conexiones establecidas|
 |`arp -a`|`arp -n`| Tabla ARP|
 |`python -m http.server 8000`|`python -m http.server (o SimpleHTTPServer) 8000`| Crea un servidor de archivos local, preferiblemente hacerlo en linux|
+||`wget http://[ip]:8000/ruta_archivo`|Descargar archivo de un servidor|
+
 
 ## Transferencia de archivos
 Para acceder a un recurso compartido de una maquina Linux desde una maquina Windows, simplemente se va a Explorador de archivos > Red > \\[ip_maquina_linux]
@@ -39,6 +41,7 @@ Los archivos que se descarguen y se suban, se harán en el directorio en el que 
 **Es importante crear una carpeta unicamente para lo que se quiere importar, porque al montar un directorio de esta manera, se borra lo que esta en la ubicacion donde se guarda**
 ```
 mkdir /home/kari/CEH-Tools
+showmount -e [ip] (ver cuales carpetas son compartidas en la maquina)
 sudo mount --source //[IP Maquina Source]/CEH-Tools --target /home/kari/CEH-Tools -o username=[usuario Maquina Source]
 
 umount [directorio local donde se guardo lo que se quiere desmontar] (vuelve al contenido anterior en caso de que se haya borrado)
