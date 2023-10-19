@@ -41,6 +41,7 @@ find / -name python* (encuentra herramientas de desarrollo y lenguajes)
 ```
 ## Transferencia de archivos
 **Compartir recursos**
+
 En Windows para compartir un archivo, se hace clic derecho> Dar acceso a > Usuarios específicos > Compartir (sin colocar usuarios)
 
 En Linux hay que habilitar el servidor Samba, el cual es una implementación de software libre del protocolo SMB, tambien conocido como Common Internet File System (CIFS)
@@ -56,7 +57,9 @@ Configurar permisos chmod y chown al directorio, recuerda usar la opción -R (re
 sudo service smbd restart
 ```
 **Acceso a recursos compartidos**
+
 Para acceder a un recurso compartido de una maquina Linux desde una maquina Windows, simplemente se va a Explorador de archivos > Red > \\[ip_maquina_linux]
+
 Por el lado contrario, para acceder a recursos compartidos de una maquina Windows desde una maquina Linux, hay varias opciones:
 
 1)	**Explorador de archivos** > Red > smb://[ip] NOTA: Cuando el nombre de usuario es un correo electrónico, como en mi caso, la contraseña que se introduce es la contraseña del correo, no la de la maquina.
