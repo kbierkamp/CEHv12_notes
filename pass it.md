@@ -3,7 +3,18 @@
 |Windows|Linux|Funcion|
 |-------|-----|-------|
 |`systeminfo`|`uname -a`| Informacion SO y Kernel Version|    
-|
+|`route print`|`route -v`| Tablas de enrutamiento|
+|`tasklist`|`ps aux`|Lista de procesos en ejecucion|
+|`taskkill /PID [numero PID]`||Finaliza el proceso|
+|`/? ; ? `|`-h; --help; -H`|Consulta ayuda en un comando|
+|`mkdir`|`mkdir`| Crea directorio|
+|`copy [ruta\archivo a copiar] [ruta\archivo de destino]`|`cp`|Copiar archivos o directorios|
+|`del`|`rm`| Borrar archivos|
+|`rd; rmdir`|`rm -r`| Borrar directorios|
+|`netstat -ano`|`netstat -tulna`| Puertos y conexiones establecidas|
+|`arp -a`|`arp -n`| Tabla ARP|
+|`python -m http.server 8000`|`python -m http.server (o SimpleHTTPServer) 8000`| Crea un servidor de archivos local, preferiblemente hacerlo en linux|
+
 ## Transferencia de archivos
 Para acceder a un recurso compartido de una maquina Linux desde una maquina Windows, simplemente se va a Explorador de archivos > Red > \\[ip_maquina_linux]
 Por el lado contrario, para acceder a recursos compartidos de una maquina Windows desde una maquina Linux, hay varias opciones:
