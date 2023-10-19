@@ -18,7 +18,7 @@
 ||`dig @[ip servidor DNS][dominio]`|Consulta si alguien ha entrado a ese dominio a través de ese servidor DNS|
 ||`dig @NameServerPrimario [dominio] axfr`|Transferencia de zona en LINUX|
 |`nslookup --> [ip o dominio] --> set type=[A,AAAA,CNAME,NS,SOA,MX,PTR,SRV]`|Lo mismo|Consultas DNS|
-|`nslookup --> server [name server principal del dominio] --> set type=any --> ls -d [dominio]`|||Transferencia de zona en Windows|
+|`nslookup --> server [name server principal del dominio] --> set type=any --> ls -d [dominio]`||||Transferencia de zona en Windows|
 **Encontrar archivos en una maquina**
 En Windows
 ```
