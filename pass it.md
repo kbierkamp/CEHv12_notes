@@ -1,9 +1,8 @@
 # MIS NOTAS CEH PRACTICAL V12
 ## Comandos sistemas operativos
-|                   Windows               |                      Linux                  |                     Funcion               |
--------------------------------------------------------------------------------------------------------------------------------------
-|                                         |                                             |                                           |
-|                                         |                                             |                                           |
+|Windows|Linux|Funcion|
+|'systeminfo'|'uname -a'| Informacion SO y Kernel Version|    
+|
 ## Transferencia de archivos
 Para acceder a un recurso compartido de una maquina Linux desde una maquina Windows, simplemente se va a Explorador de archivos > Red > \\[ip_maquina_linux]
 Por el lado contrario, para acceder a recursos compartidos de una maquina Windows desde una maquina Linux, hay varias opciones:
