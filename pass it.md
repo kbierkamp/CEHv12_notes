@@ -3,9 +3,9 @@
 Para acceder a un recurso compartido de una maquina Linux desde una maquina Windows, simplemente se va a Explorador de archivos > Red > \\[ip_maquina_linux]
 Por el lado contrario, para acceder a recursos compartidos de una maquina Windows desde una maquina Linux, hay varias opciones:
 
-1)	Explorador de archivos > Red > smb://[ip] NOTA: Cuando el nombre de usuario es un correo electrónico, como en mi caso, la contraseña que se introduce es la contraseña del correo, no la de la maquina.
+1)	**Explorador de archivos** > Red > smb://[ip] NOTA: Cuando el nombre de usuario es un correo electrónico, como en mi caso, la contraseña que se introduce es la contraseña del correo, no la de la maquina.
 
-2)	Por smbclient, con los siguientes comandos:
+2)	Por **smbclient**, con los siguientes comandos:
 ```
 smbclient //[ip]/nombre_del_recurso_compartido_o_carpeta -U [usuario]
 ```
@@ -14,14 +14,37 @@ Al introducir ese comando, te pedirá la contraseña para ese usuario, y se abre
 **NOTA:** Para poder tener acceso es necesario indicar el nombre del recurso compartido, con solo la IP no ingresara, al menos colocar “Users” o algo por el estilo.
 
 En el caso de que los directorios o archivos tengan separación, se debe colocar entre comillas ej: “Hacking ético y ciberseguridad”
-
+```
 get [nombre del archivo.extension]
 put [nombre del archivo local.extension] [nombre deseado para guardarlo en la maquina remota.extension]
-
+```
 Los archivos que se descarguen y se suban, se harán en el directorio en el que se encuentre la parrot ejecutando el smbclient y el directorio de windows donde este abierto el smbclient.
+3) Comando **mount** (Copiar archivos o directorios de una maquina Windows desde una Linux)
+**Es importante crear una carpeta unicamente para lo que se quiere importar, porque al montar un directorio de esta manera, se borra lo que esta en la ubicacion donde se guarda**
+```
+mkdir /home/kari/CEH-Tools
+sudo mount --source //[IP Maquina Source]/CEH-Tools --target /home/kari/CEH-Tools -o username=[usuario Maquina Source]
 
+umount [directorio local donde se guardo lo que se quiere desmontar] (vuelve al contenido anterior en caso de que se haya borrado)
+```
+**Acceso de forma remota**
+```
+ssh [username]@[ip]
+ssh -p [puerto] [username]@[ip]
+telnet [IP o nombre] [puerto]
 
+ftp [ip]
+cd [directorio]
+pwd 
+ls
+get [nombre del archivo remoto]
+put [nombre del archivo local]
+delete [nombre del archivo remoto]
+rmdir [nombre del directorio remoto]
+help [comando]
+quit
 
+```
 ## Scanning and Enumeration (Siempre *sudo su* antes de ejecutarlo)
 
 Escaneo para hosts activos dentro de una red, con **-A** se puede ver el hostname de la maquina: 
