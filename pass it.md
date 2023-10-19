@@ -21,6 +21,7 @@
 |`nslookup --> server [name server principal del dominio] --> set type=any --> ls -d [dominio]`||||Transferencia de zona en Windows|
 
 **Encontrar archivos en una maquina**
+
 En Windows
 ```
 dir /s C:\Users\[username]\[directorio] [nombre_de_archivo].[extension] /p
