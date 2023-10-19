@@ -18,9 +18,25 @@
 ||`dig @[ip servidor DNS][dominio]`|Consulta si alguien ha entrado a ese dominio a través de ese servidor DNS|
 ||`dig @NameServerPrimario [dominio] axfr`|Transferencia de zona en LINUX|
 |`nslookup --> [ip o dominio] --> set type=[A,AAAA,CNAME,NS,SOA,MX,PTR,SRV]`|Lo mismo|Consultas DNS|
-|`nslookup --> server [name server principal del dominio] --> set type=any --> ls -d [dominio]`|Transferencia de zona en Windows|
-
-
+|`nslookup --> server [name server principal del dominio] --> set type=any --> ls -d [dominio]`|||Transferencia de zona en Windows|
+**Encontrar archivos en una maquina**
+En Windows
+```
+dir /s C:\Users\[username]\[directorio] [nombre_de_archivo].[extension] /p
+```
+En Linux
+```
+find / -name [nombre_archivo].[extension] (Busca en / ese archivo]
+find / -name *.[extension] (busca por extension)
+find /home -user [username] (encuentra archivos de ese usuario)
+find / -atime 10 (encuentra archivos que fueron Accedidos en los ultimos 10 dias)
+find / -mtime 10 (encuentra archivos que fueron Modificados en los ultimos 10 dias)
+find / -cmin -60 (encuentra archivos que se cambiaron dentro de los ultimos 60 minutos)
+find / -amin -60 (encuentra archivos a los que se accedio en los ultimos 60 minutos o MENOS (-)) 
+find / -size +50M (encuentra archivos de tamano de 50 MB o mas) (SE PUEDE COLOCAR + O - DELANTE DEL NUMERO PARA INDICAR EL TAMANO)
+find / -perm 777 (encuentra archivos con esos permisos)
+find / -name python* (encuentra herramientas de desarrollo y lenguajes)
+```
 ## Transferencia de archivos
 **Compartir recursos**
 En Windows para compartir un archivo, se hace clic derecho> Dar acceso a > Usuarios específicos > Compartir (sin colocar usuarios)
