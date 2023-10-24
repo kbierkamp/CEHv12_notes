@@ -363,8 +363,10 @@ sqlmap -u "http://www.xyz.com/profile.aspx?id=1" --cookie="PHPSESSID=1tmgthfok04
 Cuando la solicitud se refleja en la respuesta del sitio web, se puede utilizar la palabra clave UNION SELECT. Para que un ataque UNION pueda funcionar, primero se debe determinar la cantidad de columnas y cada columna debe coincidir con el tipo de dato que se esta solicitando. 
 
 Comentarios en las diferentes bases de datos:
-'#' Sin las comillas > PostreSQL
--- - > MySQL y Microsoft
+
+'#' Sin las comillas **>** PostreSQL
+
+-- - **>** MySQL y Microsoft
 ```
 'UNION SELECT null, null
 'UNION SELECT null, null FROM dual-- (en Oracle)
