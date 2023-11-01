@@ -4,6 +4,7 @@
 |-------|-----|-------|
 |`systeminfo`|`uname -a`| Informacion SO y Kernel Version|    
 |`route print`|`route -v`| Tablas de enrutamiento|
+|'type [ruta del archivo]'|"cat [ruta del archivo]'| Ver contenido de un archivo| 
 |`tasklist`|`ps aux`|Lista de procesos en ejecucion|
 |`taskkill /PID [numero PID]`||Finaliza el proceso|
 |`/? ; ? `|`-h; --help; -H`|Consulta ayuda en un comando|
