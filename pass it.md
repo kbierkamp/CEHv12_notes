@@ -183,6 +183,11 @@ FQDN = HOSTNAME + DOMINIO + DOMINIO DE NIVEL SUPERIOR
 ENCONTRAR FQDN EN LA PROPIA COMPUTADORA:
 echo %COMPUTERNAME%.%USERDNSDOMAIN% (en Windows)
 hostname --fqdn (en Linux)
+
+nmap -sS -v -p 445,139 --script smb-os-discovery [Target]
+nmap -sS -v -p 3389 --open --script *-ntlm-info [10.10.0.18] --script-timeout=60s
+nmap -sS -v -p 389 --open --script *-ntlm-info [TARGET] --script-timeout=60s
+
 nmap -p 389 –sV [ip red] -Pn (encuentra que host en una subred tiene LDAP activo)
 nmap -A -T4 -v [ip] (normalmente con este comando y el de arriba, debe salir en "service info" en nmap el nombre de host y de dominio.
 nmap -p 389 --script ldap-brute --script-args '"cn=users,dc=[dominio],dc=com"' [ip] (enumerar LDAP) 
