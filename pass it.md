@@ -116,9 +116,9 @@ nmap -A [ip]
 nmap -Pn [ip]
 nmap -Pn --script vuln [ip] --> EoL
 ```
-Una vez que enumeraste todos los hosts activos en un segmento, en caso de que no lo hayas hecho ya, enumera los servicios y puertos abiertos en cada una de las maquinas que estan activas, puedes pasarle un .txt con las IP, una por linea, con el siguiente comando:
+Una vez que enumeraste todos los hosts activos en un segmento, en caso de que no lo hayas hecho ya, enumera los servicios y puertos abiertos en cada una de las maquinas que estan activas, puedes pasarle un .txt con las IP, una por linea, con el siguiente comando: (WAMP Server tiene activo puerto 80 y 3306 MySQL, 172.20.0.16)
 ```
-nmap -sV -iL [archivo.txt]
+nmap -sV -iL [archivo.txt] 
 ```
 Descubrimiento de Sistema Operativo:
 ```
@@ -225,7 +225,7 @@ Para convertir a texto plano un hash, simplemente se copia el contenido del arch
 ```
 hashcat -a 0 [archivo_hash_a_crackear] [wordlist_hashes, puede ser rockyou]
 ```
-**Veracrypt** Cuando se debe desencriptar un Volume File. El password para montar en el disco puede estar hasheado.
+**Veracrypt** Cuando se debe desencriptar un Volume File. El password para montar en el disco puede estar hasheado. Primero se selecciona el disco donde se quiere montar, se selecciona el Volume File que te dan, y la contrasena puede estar en la carpeta Documents de la Parrot o de la Windows, se decodifica con hashes.com
 
 **BCTextEncoder**: Se copia el contenido del archivo y se decodifica usando el password que dan.
 
