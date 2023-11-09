@@ -281,6 +281,7 @@ Escanear archivos: Hybrid analysis (https://www.hybrid-analysis.com), Virus tota
 Para detectar empaquetamientos y ofuscacion: **PEiD**
 
 Para EntryPoint, hash, entropia, etc: **DIE** --> Subir el archivo, escanear, y darle a "Advanced" --> Cambiar el file type hasta que coincida con el patron. 
+Si te dan un archivo sin extension, se utiliza programa HxD, se carga el archivo en el programa y se ven los primeros bits hexadecimales, se busca en el Wikipedia (https://en.wikipedia.org/wiki/List_of_file_signatures) que tipo de archivo es, y se agrega la extension para poder meterlo en el DIE. 
 
 Para **RAT** --> **Theef** El servidor se instala en la victima y el cliente es lo que controla el RAT. Permite las conexiones a traves del puerto 9871. El puerto en la interfaz del cliente se deja por defecto: 6703 (e-design-web) y FTP 2968 (enpp). 
 nmap -p 6703,2968 192.168.222.0/24
