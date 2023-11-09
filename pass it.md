@@ -282,7 +282,10 @@ Para detectar empaquetamientos y ofuscacion: **PEiD**
 
 Para EntryPoint, hash, entropia, etc: **DIE** --> Subir el archivo, escanear, y darle a "Advanced" --> Cambiar el file type hasta que coincida con el patron. 
 
-Para **RAT** --> **Theef** El servidor se instala en la victima y el cliente es lo que controla el RAT. Permite las conexiones a traves del puerto 9871. El puerto en la interfaz del cliente se deja por defecto: 6703 (e-design-web) y FTP 2968 (enpp). En el cliente, es necesario que en la opcion "Local Options" --> "Client Settings" se coloca la direccion del directorio local la ruta de la carpeta donde esta instalado theef, luego en File Search o File Manager, se coloca la ruta del archivo como C:\ y donde esta la extension se coloca el nombre.extension del archivo a buscar, se da doble clic o clic derecho y "Download file", se descargara en la ruta que se coloco como directorio local. 
+Para **RAT** --> **Theef** El servidor se instala en la victima y el cliente es lo que controla el RAT. Permite las conexiones a traves del puerto 9871. El puerto en la interfaz del cliente se deja por defecto: 6703 (e-design-web) y FTP 2968 (enpp). 
+nmap -p 6703,2968 192.168.222.0/24
+
+En el cliente, es necesario que en la opcion "Local Options" --> "Client Settings" se coloca la direccion del directorio local la ruta de la carpeta donde esta instalado theef, luego en File Search o File Manager, se coloca la ruta del archivo como C:\ y donde esta la extension se coloca el nombre.extension del archivo a buscar, se da doble clic o clic derecho y "Download file", se descargara en la ruta que se coloco como directorio local. 
 
 En **njRAT** el puerto por defecto es 5552.
 
