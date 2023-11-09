@@ -114,6 +114,7 @@ Escaneo para hosts activos dentro de una red, con **-A** se puede ver el hostnam
 ```
 nmap -A [ip]
 nmap -Pn [ip]
+nmap -Pn --script vuln [ip] --> EoL
 ```
 Una vez que enumeraste todos los hosts activos en un segmento, en caso de que no lo hayas hecho ya, enumera los servicios y puertos abiertos en cada una de las maquinas que estan activas, puedes pasarle un .txt con las IP, una por linea, con el siguiente comando:
 ```
