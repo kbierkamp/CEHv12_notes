@@ -2,7 +2,8 @@
 ## Comandos sistemas operativos
 |Windows|Linux|Funcion|
 |-------|-----|-------|
-|`systeminfo`|`uname -a`| Informacion SO y Kernel Version|    
+|`systeminfo`|`uname -a`| Informacion SO y Kernel Version|   
+|`net user`| `/etc/passwd`| Usuarios registrados en una maquina|
 |`route print`|`route -v`| Tablas de enrutamiento|
 |'type [ruta del archivo]'|"cat [ruta del archivo]'| Ver contenido de un archivo| 
 |`tasklist`|`ps aux`|Lista de procesos en ejecucion|
