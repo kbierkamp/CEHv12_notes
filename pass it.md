@@ -169,6 +169,12 @@ nmap --script mysql-enum [ip]
 ```
 nmap -sV --script=http-enum [www.dominio.com]
 ```
+**Nesssus** Para escaneo de vulnerabilidades, puede funcionar para el EoL 
+```
+https://www.solvetic.com/tutoriales/article/11878-como-instalar-y-usar-nessus-en-kali-linux/
+sudo /bin/systemctl start nessusd.service
+https://[ip]:8834
+```
 ## Steganography
 Nota: El archivo a descifrar debe estar en la **misma** carpeta que snow.exe
 
