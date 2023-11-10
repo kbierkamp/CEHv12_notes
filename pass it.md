@@ -22,6 +22,30 @@
 |`nslookup --> [ip o dominio] --> set type=[A,AAAA,CNAME,NS,SOA,MX,PTR,SRV]`|Lo mismo|Consultas DNS|
 |`nslookup --> server [name server principal del dominio] --> set type=any --> ls -d [dominio]`||||Transferencia de zona en Windows|
 
+**PUERTOS**
+|Puerto| Protocolo |
+|------|-----------|
+|20-21| FTP
+|22|SSH|
+|23|Telnet|
+|25|SMTP|
+|53|DNS|
+|67-68|DHCP|
+|69|TFTP|
+|80|HTTP|
+|110|POP3|
+|137-139|NetBIOS|
+|161-162|SNMP|
+|389|LDAP|
+|636|LDAP over SSL|
+|989-990| FTP over SSL|
+|1241| Nessus|
+|1443-1434|MSSQL|
+|3306|MySQL|
+|5432|PostgreSQL|
+|3389|RDP|
+|445|SMB|
+
 **Encontrar archivos en una maquina**
 
 En Windows
