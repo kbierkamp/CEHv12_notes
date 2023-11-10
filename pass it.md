@@ -45,7 +45,14 @@
 |5432|PostgreSQL|
 |3389|RDP|
 |445|SMB|
+**Permisos en Linux**
+El comando chown se utiliza para cambiar la propiedad de archivos y directorios, el usuario y el grupo al que pertenece.
 
+Execute: 1 o --x; Write: 2 o --w; Read: 4 o r--
+```
+chown -R nnn [usuario]:[grupo] [archivo]
+chmod nnn [archivo o directorio]
+```
 **Encontrar archivos en una maquina**
 
 En Windows
