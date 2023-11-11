@@ -246,7 +246,7 @@ http.request.method == POST (Una vez que tienes el Request se da clic en el y se
 ```
 aircrack-ng [pcap file] (Crack the WEP Key)
 aircrack-ng [WPA2 pcap file] (te dice el BSSID) 
-aircrack-ng -a2 -b [Target BSSID] -w [password_wordlist.txt] [WPA2 pcap file]
+aircrack-ng -a2 -b [Target BSSID] -w [password1_wordlist.txt] [WPA2 pcap file]
 
 Para identificar el BSSID primero se intenta con el comando de arriba, si no lo arroja, se abre Wireshark --> Columna Info dice "Probe response" --> Se selecciona el paquete --> Categoria IEEE 802.11 Probe Response --> MAC de Source Address (BSSID)
 ```
