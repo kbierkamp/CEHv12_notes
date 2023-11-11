@@ -5,7 +5,7 @@
 |`systeminfo`|`uname -a`| Informacion SO y Kernel Version|   
 |`net user`| `/etc/passwd`| Usuarios registrados en una maquina|
 |`route print`|`route -v`| Tablas de enrutamiento|
-|'type [ruta del archivo]'|"cat [ruta del archivo]'| Ver contenido de un archivo| 
+|'type [ruta del archivo]'|"cat o more [ruta del archivo]'| Ver contenido de un archivo| 
 |`tasklist`|`ps aux`|Lista de procesos en ejecucion|
 |`taskkill /PID [numero PID]`||Finaliza el proceso|
 |`/? ; ? `|`-h; --help; -H`|Consulta ayuda en un comando|
@@ -45,6 +45,16 @@
 |5432|PostgreSQL|
 |3389|RDP|
 |445|SMB|
+
+**Identificar OS por TTL**
+|Sistema Operativo| TTL| TCP Window Size|
+|-----------------|----|-----------------|
+|Linux|64|5840|
+|Windows|128|65535 o 1Gb|
+|FreeBSD|64|65535|
+|OpenBSD|64|16384|
+
+
 **Permisos en Linux**
 El comando chown se utiliza para cambiar la propiedad de archivos y directorios, el usuario y el grupo al que pertenece.
 
@@ -62,7 +72,8 @@ dir /s C:\Users\[username]\[directorio] [nombre_de_archivo].[extension] /p
 En Linux
 ```
 find / -name [nombre_archivo].[extension] (Busca en / ese archivo]
-find / -name *.[extension] (busca por extension)
+find / -iname *.[extension] (busca por extension)
+find . -type d [nombre] (busca directorios)
 find /home -user [username] (encuentra archivos de ese usuario)
 find / -atime 10 (encuentra archivos que fueron Accedidos en los ultimos 10 dias)
 find / -mtime 10 (encuentra archivos que fueron Modificados en los ultimos 10 dias)
@@ -144,9 +155,11 @@ quit
 Escaneo para hosts activos dentro de una red, con **-A** se puede ver el hostname de la maquina: 
 -Pn es util cuando los hosts salen inactivos como "host seem be down"
 ```
-nmap -A [ip]
+nmap -A [ip] -oN [nombre.txt]   (si quiero guardar en un nuevo resultado sin sobreescribir se coloca >> [nombre.txt])
 nmap -Pn [ip]
+nmap -sn [ip] (solo chequea si el host esta UP)
 nmap -Pn --script vuln [ip] --> EoL
+
 ```
 Una vez que enumeraste todos los hosts activos en un segmento, en caso de que no lo hayas hecho ya, enumera los servicios y puertos abiertos en cada una de las maquinas que estan activas, puedes pasarle un .txt con las IP, una por linea, con el siguiente comando: (WAMP Server tiene activo puerto 80 y 3306 MySQL, 172.20.0.16)
 ```
@@ -365,7 +378,7 @@ Crawling y escaneo de vulnerabilidades web --> **OWASP ZAP**
 
 **dirb** para enumerar directorios de forma recursiva, asegurate de que en el archivo de wordlist este incluido el nombre del archivo (con su extension) que tienes que encontrar.
 ```
-dirb http://training.cehorg.com /usr/share/dirb/wordlists/common.txt -w
+dirb http://[dominio.com] /usr/share/dirb/wordlists/common.txt -w
 
 ALTERNATIVA: gobuster dir -u [dominio o ip] -w [wordlist] 
 ```
@@ -413,7 +426,7 @@ CHEQUEA NOMBRES DE LAS BASES DE DATOS
 sqlmap -u "http://www.xyz.com/profile.aspx?id=1" --cookie="PHPSESSID=ykPje8QB; security=low" --dbs
 
 CHEQUEA LAS TABLAS DE LA BASE DE DATOS
-sqlmap -u "http://domain.com/path.aspx?id=1" --cookie="PHPSESSID=abc123; security=low" -D [database_name] --tables
+sqlmap -u "http://domain.com/path.aspx?id=1" --cookie="PHPSESSID=abc123xdfhiounoi; security=low" -D [database_name] --tables
 
 CHEQUEA LAS COLUMNAS DE LA TABLA
 sqlmap -u "http://domain.com/path.aspx?id=1" --cookie="PHPSESSID=1tmgthfok042dsltsmbnvkwj2387; security=low" -D [database_name] -T [target_Table] --columns
